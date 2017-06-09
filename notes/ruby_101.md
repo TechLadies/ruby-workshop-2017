@@ -216,7 +216,7 @@ Okay, we've got an overview of the basic data types, but how do we store data an
 2.3.0 :001 > x = 10
 ```
 
-[!variable octopus](./images/variable-as-octopus.jpeg)
+![variable octopus](./images/variable-as-octopus.jpeg)
 
 What this does is ask octopus `x` to hold on to the value `10`. The `=` sign here is different from the `=` sign in math, which indicates *equality*. In math we write things like `1 + 9 = 10` which means that the left-hand side and the right-hand side have the same value. Not so in programming. In virtually all common programming languages, the `=` sign is an *assignment operator*. We read `x = 10` not as "x equals 10" but as "assign the value 10 to the variable x" or "assign the variable x with the value 10", or, to repeat my analogy, "ask octopus x to hold onto the value 10".
 
@@ -264,7 +264,7 @@ Seems simple enough, but variable assignment is actually more tricky than it loo
 
 Here is what happens graphically:
 
-[!variable octopus](./images/variable-reassignment.jpeg)
+![variable octopus](./images/variable-reassignment.jpeg)
 
 Now we reassign `x`, and assign `x` to `y`:
 
@@ -275,7 +275,7 @@ Now we reassign `x`, and assign `x` to `y`:
 
 Again, here it is graphically:
 
-[!variable octopus](./images/variable-reference-2.jpeg)
+![variable octopus](./images/variable-reference-2.jpeg)
 
 Pay attention, there's something very subtle but important going on here. Notice how I didn't draw two `"Hello World"` strings for octopuses `x` and `y` to hold on to. There is only *one* `"Hello World"` string, and both octopuses **are holding on to the same one**.
 
@@ -292,8 +292,8 @@ Now, Ruby has two ways of making a string lowercase: `downcase` and `downcase!`.
 
 Looks exactly the same here. But there is actually a very important difference: `downcase` creates a *new string*, copied from the original string, but makes all the letters lower case, while `downcase!` *changes, or mutates, the original string in place*. Not concrete enough? Imagine: your string is just a bunch of 1's and 0's somewhere in your computer memory. With `downcase`, your computer finds another place in memory, copies that bunch of 1's and 0's there, then changes them so that the new string is all lowercase. Your original string is *left untouched*. With `downcase`, your computer finds your original string, and *modifies its bunch of 1's and 0's directly*.
 
-[!downcase!](variable-downcase-2.jpeg)
-[!downcase](variable-downcase-1.jpeg)
+![downcase!](variable-downcase-2.jpeg)
+![downcase](variable-downcase-1.jpeg)
 
 We can see the difference most clearly when we assign our string to variables:
 
@@ -304,7 +304,7 @@ We can see the difference most clearly when we assign our string to variables:
 
 Remember, this is the picture we had:
 
-[!downcase](variable-reference-2.jpeg)
+![downcase](variable-reference-2.jpeg)
 
 Now, remember we can use our variables to refer to the values we assigned them, so let's try making our `"Hello World"` string lowercase. Let's try it with `downcase`
 
@@ -314,7 +314,7 @@ Now, remember we can use our variables to refer to the values we assigned them, 
 2.3.0 :005 > y
 ```
 
-[!downcase octopuses](variable-downcase-3.jpeg)
+![downcase octopuses](variable-downcase-3.jpeg)
 
 Now with `downcase!`:
 
@@ -324,7 +324,7 @@ Now with `downcase!`:
 2.3.0 :005 > y
 ```
 
-[!downcase! octopuses](variable-downcase-4.jpeg)
+![downcase! octopuses](variable-downcase-4.jpeg)
 
 See the difference? If you understood that easily, congrats! If not, mull it over, practice programming some more, return to this section, and see if you can make sense of it. It's a tricky concept.
 
@@ -508,7 +508,7 @@ end
 
 Here is how it looks like graphically:
 
-[!if-elsif flowchart](./images/if-elsif-complete.png)
+![if-elsif flowchart](./images/if-elsif-complete.png)
 
 Notice there are three *conditional branches*, that's why I call it a tree. In this case, our tree covers the space of all possible outcomes (whatever the value of `x`, our program will always go into one of the branches). This is because the `else` clause captures all the other cases of `x` that don't fulfill the first two conditions.
 
@@ -524,7 +524,7 @@ elsif x < 10
 end
 ```
 
-[!if-elsif flowchart](./images/if-elsif-incomplete.png)
+![if-elsif flowchart](./images/if-elsif-incomplete.png)
 
 Now let's use our fancy new knowledge to spruce up Roll a Die a little. Well-designed games should have just the right amount of uncertainty to keep players excited. No one wants to play a game that they know they will always win. With that in mind, let's make sure our players will lose the game if they roll a 4 (in deference to Chinese superstition, since 4 in most Chinese languages is a homophone of the word for 'die'. Guess it's time to rename our game....Roll, and DIE ;) ):
 

@@ -629,7 +629,7 @@ Pretty much all applications (web or not) need to store data. For that we need a
 
 How do we store and fetch such data quickly? How do we do so in an error-free way? How can we guarantee our data was saved properly? People have come up with all kinds of *database models* -- ways of structuring a database -- to solve these problems. One of these models is the **relational model**, the most popular model in use. In a relational model we structure data into tables with rows and columns. So, for example, I have a table of players. I need to store their name, win message, lose message, wins, and losses, so my database table will have a name column, a win message column, a lose message column, a wins column and a losses column. Each column has a certain datatype. I also have several player *records* stored in my database. Each record corresponds to a row.
 
-[!players table](./images/players-table.png)
+![players table](./images/players-table.png)
 
 The relatively simple structure of a database using a relational model, or a **relational database**, allows us to easily retrieve data and maintain data integrity (for example, it allows us to ensure that when a post is deleted, all its associated comments will also be removed from the database, and not just left orphaned there; or when we create a new comment, it must associated to some existing post)
 
