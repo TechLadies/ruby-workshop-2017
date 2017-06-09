@@ -292,8 +292,8 @@ Now, Ruby has two ways of making a string lowercase: `downcase` and `downcase!`.
 
 Looks exactly the same here. But there is actually a very important difference: `downcase` creates a *new string*, copied from the original string, but makes all the letters lower case, while `downcase!` *changes, or mutates, the original string in place*. Not concrete enough? Imagine: your string is just a bunch of 1's and 0's somewhere in your computer memory. With `downcase`, your computer finds another place in memory, copies that bunch of 1's and 0's there, then changes them so that the new string is all lowercase. Your original string is *left untouched*. With `downcase`, your computer finds your original string, and *modifies its bunch of 1's and 0's directly*.
 
-![downcase!](variable-downcase-2.jpeg)
-![downcase](variable-downcase-1.jpeg)
+![downcase!](./images/variable-downcase-2.jpeg)
+![downcase](./images/variable-downcase-1.jpeg)
 
 We can see the difference most clearly when we assign our string to variables:
 
@@ -304,7 +304,7 @@ We can see the difference most clearly when we assign our string to variables:
 
 Remember, this is the picture we had:
 
-![downcase](variable-reference-2.jpeg)
+![downcase](./images/variable-reference-2.jpeg)
 
 Now, remember we can use our variables to refer to the values we assigned them, so let's try making our `"Hello World"` string lowercase. Let's try it with `downcase`
 
@@ -314,7 +314,7 @@ Now, remember we can use our variables to refer to the values we assigned them, 
 2.3.0 :005 > y
 ```
 
-![downcase octopuses](variable-downcase-3.jpeg)
+![downcase octopuses](./images/variable-downcase-3.jpeg)
 
 Now with `downcase!`:
 
@@ -324,7 +324,7 @@ Now with `downcase!`:
 2.3.0 :005 > y
 ```
 
-![downcase! octopuses](variable-downcase-4.jpeg)
+![downcase! octopuses](./images/variable-downcase-4.jpeg)
 
 See the difference? If you understood that easily, congrats! If not, mull it over, practice programming some more, return to this section, and see if you can make sense of it. It's a tricky concept.
 
