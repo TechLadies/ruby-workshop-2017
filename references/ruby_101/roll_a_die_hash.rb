@@ -27,7 +27,6 @@ players = {
   "Wei-liang" => {win: "Yesss", lose: "Nooo"},
 }
 
-
 players.each do |(name, msgs)|
   roll_and_die(6, 6, 4, name, msgs)
   puts ""

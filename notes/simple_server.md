@@ -108,14 +108,16 @@ loop do
   response = "Hello World!\n"
 
   # HTTP headers
-  socket.print <<~EOS
-  HTTP/1.1 200 OK
-  Content-Type: text/plain
-  Content-Length: #{response.bytesize}
-  Connection close
-  EOS
+  socket.print(
+  "HTTP/1.1 200 OK\r\n" +
+  "Content-Type: text/html\r\n" +
+  "Content-Length: #{response.bytesize}\r\n" +
+  "Connection close\r\n"
+  )
 
   # New line after headers
+  # HTTP standard specifies that each line must end
+  # with a carriage return (\r) and line-feed (\n)
   socket.print "\n"
   # Send response body
   socket.print response
@@ -193,14 +195,16 @@ loop do
 
   File.open(path) do |file|
     # HTTP headers
-    socket.print <<~EOS
-    HTTP/1.1 200 OK
-    Content-Type: text/html
-    Content-Length: #{file.size}
-    Connection close
-    EOS
+    socket.print(
+    "HTTP/1.1 200 OK\r\n" +
+    "Content-Type: text/html\r\n" +
+    "Content-Length: #{file.size}\r\n" +
+    "Connection close\r\n"
+    )
 
     # New line after headers
+    # HTTP standard specifies that each line must end
+    # with a carriage return (\r) and line-feed (\n)
     socket.print "\n"
     # Send file over socket stream
     IO.copy_stream(file, socket)
@@ -239,7 +243,7 @@ This is in fact what Rails does. We won't serve dynamic content with our simple 
 
 ## HTTP verbs and RESTful URLs
 
-When you learn Rails you will hear a lot about REST. What the heck is REST? It's a big and complex topic, and I don't profess to understand it fully myself (hence, I will probably struggle to explain it in any clear manner). But just know -- it stands for REpresentational State Transfer, and it defines an architecture for the Web (how should computers talk to each other? How should these bunch of computers be structured?). Some smart guy called Roy Fielding coined the term in [hist PhD dissertation](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm), and it formed the basis for the design of the HTTP protocol.
+When you learn Rails you will hear a lot about REST. What the heck is REST? It's a big and complex topic, and I don't profess to understand it fully myself (hence, I will probably struggle to explain it in any clear manner). But just know -- it stands for REpresentational State Transfer, and it defines an architecture for the Web (how should computers talk to each other? How should these bunch of computers be structured?). Some smart guy called Roy Fielding coined the term in [his PhD dissertation](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm), and it formed the basis for the design of the HTTP protocol.
 
 I am going to try to convey to you whatever limited understanding of REST I have to you. REST imposes several architectural design constraints. One of them says that when clients talk to servers, it should ask for resources, instead of actions they want the server to do. So, imagine you have a server running a blogging application. Posts are one type of resource in this application. A non-RESTful URL to fetch a post would be something like `http://example.com/getPost?id=1`, whereas a RESTful URL would be something like `http://example.com/posts/1`. You can think of it as the distinction between nouns and verbs.
 
@@ -329,7 +333,7 @@ Basically, it's:
 The `<path to resource>` part is what we need. It's basically the URL minus the hostname and scheme part (ie. `http://localhost:8888/path/to/resource` minus the `http://localhost:8888` part is just `path/to/resource`). For example if you try to `curl` to the following URL:
 
 ```bash
-$ curl localhost:8888/players/0
+$ curl localhost:8888/players
 ```
 
 You will see that your request line is `GET /players HTTP/1.1`.
@@ -625,7 +629,7 @@ Pretty much all applications (web or not) need to store data. For that we need a
 
 How do we store and fetch such data quickly? How do we do so in an error-free way? How can we guarantee our data was saved properly? People have come up with all kinds of *database models* -- ways of structuring a database -- to solve these problems. One of these models is the **relational model**, the most popular model in use. In a relational model we structure data into tables with rows and columns. So, for example, I have a table of players. I need to store their name, win message, lose message, wins, and losses, so my database table will have a name column, a win message column, a lose message column, a wins column and a losses column. Each column has a certain datatype. I also have several player *records* stored in my database. Each record corresponds to a row.
 
-[image]
+[!players table](./images/players-table.png)
 
 The relatively simple structure of a database using a relational model, or a **relational database**, allows us to easily retrieve data and maintain data integrity (for example, it allows us to ensure that when a post is deleted, all its associated comments will also be removed from the database, and not just left orphaned there; or when we create a new comment, it must associated to some existing post)
 

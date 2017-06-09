@@ -110,13 +110,13 @@ But what about the extra `nil`? Now, *every expression in Ruby is evaluated to s
 Okay, maybe you just got more confused. But the key takeaway is this: *the value that a line of code (expression) evaluates to is different from whatever you print to screen*. Keep this in mind for now, it will become clearer when we talk about functions (and write some of our own!)
 
 > **Sidenote: function vs command**
-> From my description above, you may think that functions and commands are no different
+> From my description above, you may think that functions and commands are no different.
 > Not quite. Typically Bash commands are separate programs that are executed by your shell as another process.
 > (of course some commands are shell builtins, in which case they are not executed in another process)
-> Functions, on the other hand, are just blocks of code, identified by a name, that can be reused in your program
-> We do this by *invoking* a function, using its name like we did with `puts`
-> Functions are not separate programs that are run as separate processes like external Bash commands
-> You use them in your own program, and your whole program runs as a single process
+> Functions, on the other hand, are just blocks of code, identified by a name, that can be reused in your program.
+> We do this by *invoking* a function, using its name like we did with `puts`.
+> Functions are not separate programs that are run as separate processes like external Bash commands.
+> You use them in your own program, and your whole program runs as a single process.
 
 Okay, before we get ahead of ourselves with functions and everything, let's play around with `irb` a little more. `irb` is a very handy learning tool, because it allows you execute little snippets of Ruby code and get immediate feedback on what they do. At the end of the day, when you write a proper Ruby program, you will invariably write it in a file and execute it with `ruby`, but `irb` is still very useful for when you're not sure about the behaviour of a bit of code and want to test it out quickly.
 
@@ -201,6 +201,7 @@ You may be wondering, is there a way I can check what type my literal values are
 2.3.0 :004 > true.class
 2.3.0 :005 > ["a", "b", "c"].class
 2.3.0 :006 > {a: 2}.class
+2.3.0 :007 > :hello.class
 ```
 
 (Note: with `5.class` you will get `Fixnum`. This is a bit of an implementation detail, but at the end of the day `Fixnum` basically means an integer type)
@@ -215,7 +216,7 @@ Okay, we've got an overview of the basic data types, but how do we store data an
 2.3.0 :001 > x = 10
 ```
 
-[image here]
+[!variable octopus](./images/variable-as-octopus.jpeg)
 
 What this does is ask octopus `x` to hold on to the value `10`. The `=` sign here is different from the `=` sign in math, which indicates *equality*. In math we write things like `1 + 9 = 10` which means that the left-hand side and the right-hand side have the same value. Not so in programming. In virtually all common programming languages, the `=` sign is an *assignment operator*. We read `x = 10` not as "x equals 10" but as "assign the value 10 to the variable x" or "assign the variable x with the value 10", or, to repeat my analogy, "ask octopus x to hold onto the value 10".
 
@@ -263,7 +264,7 @@ Seems simple enough, but variable assignment is actually more tricky than it loo
 
 Here is what happens graphically:
 
-[image]
+[!variable octopus](./images/variable-reassignment.jpeg)
 
 Now we reassign `x`, and assign `x` to `y`:
 
@@ -274,7 +275,7 @@ Now we reassign `x`, and assign `x` to `y`:
 
 Again, here it is graphically:
 
-[image]
+[!variable octopus](./images/variable-reference-2.jpeg)
 
 Pay attention, there's something very subtle but important going on here. Notice how I didn't draw two `"Hello World"` strings for octopuses `x` and `y` to hold on to. There is only *one* `"Hello World"` string, and both octopuses **are holding on to the same one**.
 
@@ -291,7 +292,8 @@ Now, Ruby has two ways of making a string lowercase: `downcase` and `downcase!`.
 
 Looks exactly the same here. But there is actually a very important difference: `downcase` creates a *new string*, copied from the original string, but makes all the letters lower case, while `downcase!` *changes, or mutates, the original string in place*. Not concrete enough? Imagine: your string is just a bunch of 1's and 0's somewhere in your computer memory. With `downcase`, your computer finds another place in memory, copies that bunch of 1's and 0's there, then changes them so that the new string is all lowercase. Your original string is *left untouched*. With `downcase`, your computer finds your original string, and *modifies its bunch of 1's and 0's directly*.
 
-[image here]
+[!downcase!](variable-downcase-2.jpeg)
+[!downcase](variable-downcase-1.jpeg)
 
 We can see the difference most clearly when we assign our string to variables:
 
@@ -302,7 +304,7 @@ We can see the difference most clearly when we assign our string to variables:
 
 Remember, this is the picture we had:
 
-[image]
+[!downcase](variable-reference-2.jpeg)
 
 Now, remember we can use our variables to refer to the values we assigned them, so let's try making our `"Hello World"` string lowercase. Let's try it with `downcase`
 
@@ -312,7 +314,7 @@ Now, remember we can use our variables to refer to the values we assigned them, 
 2.3.0 :005 > y
 ```
 
-[image]
+[!downcase octopuses](variable-downcase-3.jpeg)
 
 Now with `downcase!`:
 
@@ -322,7 +324,7 @@ Now with `downcase!`:
 2.3.0 :005 > y
 ```
 
-[image]
+[!downcase! octopuses](variable-downcase-4.jpeg)
 
 See the difference? If you understood that easily, congrats! If not, mull it over, practice programming some more, return to this section, and see if you can make sense of it. It's a tricky concept.
 
@@ -505,7 +507,8 @@ end
 ```
 
 Here is how it looks like graphically:
-[flowchart]
+
+[!if-elsif flowchart](./images/if-elsif-complete.png)
 
 Notice there are three *conditional branches*, that's why I call it a tree. In this case, our tree covers the space of all possible outcomes (whatever the value of `x`, our program will always go into one of the branches). This is because the `else` clause captures all the other cases of `x` that don't fulfill the first two conditions.
 
@@ -521,7 +524,7 @@ elsif x < 10
 end
 ```
 
-[image]
+[!if-elsif flowchart](./images/if-elsif-incomplete.png)
 
 Now let's use our fancy new knowledge to spruce up Roll a Die a little. Well-designed games should have just the right amount of uncertainty to keep players excited. No one wants to play a game that they know they will always win. With that in mind, let's make sure our players will lose the game if they roll a 4 (in deference to Chinese superstition, since 4 in most Chinese languages is a homophone of the word for 'die'. Guess it's time to rename our game....Roll, and DIE ;) ):
 
@@ -541,7 +544,7 @@ end
 ```
 
 > **Extras**
-> Try to spice things up even more
+> Try to spice things up even more.
 > Modify the code so that players have to proclaim their love for Ruby to world if they roll a 2 (but the game should go on)
 
 ## Functions
@@ -562,9 +565,9 @@ Basically, we defined a function named `add_one` which contains two lines. Take 
 What happens when you call a function, is that whatever is inside the function body gets executed. The parameters that a function take are just variables, so when you called the function, you passed the value 10 to octopus x, and inside the function, you do something with octopus x.
 
 > **Sidenote: the `return` statement**
-> Yes, of course, that function could really just have had one line
+> Yes, of course, that function could really just have had one line.
 > But I wanted to break it down bit by bit.
-> Also, in Ruby, the `return` statement isn't actually necessary in this case, because Ruby implicitly returns the value the last line of the function evaluate to
+> Also, in Ruby, the `return` statement isn't actually necessary in this case, because Ruby implicitly returns the value the last line of the function evaluates to.
 
 Why do we need functions? Because they allow us to group logical units of computation together and reuse them elsewhere, reducing duplication in our code. The function name also serves to describe what the bunch of code contained in it does, making your code more readable. In other words, functions allow us to create *abstractions*.
 
@@ -590,7 +593,7 @@ loop do
 end
 ```
 
-You may be thinking, "Okay, so you just moved a bunch of code to another place. But you still ended up with more lines. How is that an improvement?" Well, we actually gained quite a bit by *encapsulating that conditional logic in a function* -- the end game logic is now reusable, and our program is now more description. Instead of just seeing a bunch of `if...elsif` statements, we can very clearly see the *semantics*, or the *meaning* of our program -- we roll a dice, then check for the end game condition. Furthermore, isolating that logic in a function of its own makes it easier for us to improve our program in the future. For instance, say now I want to write variations of the game which have different win and lose conditions. We can modify our `check_end_game` function like so:
+You may be thinking, "Okay, so you just moved a bunch of code to another place. But you still ended up with more lines. How is that an improvement?" Well, we actually gained quite a bit by *encapsulating that conditional logic in a function* -- the end game logic is now reusable, and our program is now *more descriptive*. Instead of just seeing a bunch of `if...elsif` statements, we can very clearly see the *semantics*, or the *meaning* of our program -- we roll a dice, then check for the end game condition. Furthermore, isolating that logic in a function of its own makes it easier for us to improve our program in the future. For instance, say now I want to write variations of the game which have different win and lose conditions. We can modify our `check_end_game` function like so:
 
 ```ruby
 def game_end?(num, win_num, lose_num)
@@ -626,8 +629,8 @@ end
 
 > **Sidenote: naming functions**
 > Notice how we name the function `game_end?` with the question mark behind.
-> This is a Ruby convention to indicate that the function returns a boolean value (true or false)
-> We usually do this when we expect to use the function in an `if` or `unless` condition, to make it read like English
+> This is a Ruby convention to indicate that the function returns a boolean value (true or false).
+> We usually do this when we expect to use the function in an `if` or `unless` condition, to make it read like English.
 
 Now, if I want to make all of you play multiple variations of Roll, and DIE, maybe I should put the whole game into its own function:
 
@@ -655,8 +658,8 @@ def roll_die(n)
   Random.rand(n) + 1
 end
 
-# note: the if..elsif..end statement evalutes to `nil`
-# so we don't win or lose, the function will return `nil`
+# note: the if..elsif..end statement evaluates to `nil`
+# so if we neither win nor lose, the function will return `nil`
 # `nil` acts like `false` in conditional expressions
 # it is a so-called "falsey" value
 # that is why we can omit the `return false` from the last line
@@ -688,8 +691,8 @@ end
 ```
 
 > **Extras**
-> Now that you know about functions, and you know that functions always return some value, you may want to return to that question of `puts "Hello World"` in `irb`
-> You should understand now why `irb` prints a `nil` for us. Even though `"Hello World"` is printed to screen, the `puts` function *returns* `nil`
+> Now that you know about functions, and you know that functions always return some value, you may want to return to that question of `puts "Hello World"` in `irb`.
+> You should understand now why `irb` prints a `nil` for us. Even though `"Hello World"` is printed to screen, the `puts` function *returns* `nil`.
 > `irb` is printing this return value
 
 ## Arrays and Hashes
@@ -705,7 +708,7 @@ cast = ["Jun Qi", "Ruby", "Terminal", "Bash", "cat", "curl", "variable octopus"]
 puts "Your coach today is #{cast[0]}"
 
 # you can use negative indices to start counting from the end
-puts "I'm sure you've met#{cast[-1]}"
+puts "I'm sure you've met #{cast[-1]}"
 
 # array of arrays
 # we can use this to represent points on a graph
@@ -798,8 +801,6 @@ This is a GIGANTIC topic which I can hardly do any justice to in the space of th
 Other than being interpreted, general-purpose, high-level, optimized for programmer happiness etc., Ruby is also a highly **object-oriented** language. What does that mean? Object orientation is a *programming paradigm*, a way of thinking about programming, a way of modelling our problems.
 
 We treat the world as a bunch of objects. Objects have two important things: *attributes and methods*. Or you can think of them as *state and actions*. For example, a dog has several attributes like hair color, weight, and fur length, and it can do things like bark, and eat food.
-
-[image]
 
 Now here's how we represent this in Ruby code:
 
