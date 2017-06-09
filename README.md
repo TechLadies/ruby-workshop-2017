@@ -55,7 +55,7 @@ The following has been gratefully borrowed from [the setup instructions for the 
 17. **Click on the green Create Workspace button to proceed.**
 18. **You should see a loading window, and this may take a while, so keep the window open and let it run. Please try this at home.**
 19. **When things are set up, you should see your workspace, with a file manager in the left column, a text editor taking up most of the space in the main right area and a smaller terminal in the bottom of the right area.**
-20. Now *in your terminal*, type: `gem install bundler`. To test that it was successfully installed, type: `bundle`. You should see a red line of text: `Could not locate Gemfile`.
+20. **Now *in your terminal*, type: `gem install bundler`. To test that it was successfully installed, type: `bundle`. You should see a red line of text: `Could not locate Gemfile`.**
 
 After you're done with this, continue to the next section to figure out where all the files you'll need are laid out.
 
