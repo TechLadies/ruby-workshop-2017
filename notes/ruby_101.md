@@ -408,7 +408,7 @@ How would this look with a `while` loop?
 # so we just initialize to some number that is not 6
 num = -1
 
-while num == 6 do
+while num != 6 do
   num = Random.rand(6) + 1
   puts "You rolled #{num}"
 end
