@@ -835,7 +835,7 @@ Test out your server again (you know the drill). It doesn't look as nice as befo
 
 You notice by interfacing with our sqlite database directly, we had to write SQL in our Ruby code, and furthermore, we lost a nice object representation of our data -- now we just get an array of values that represent a person record. But what if we want to pass our player to a `RollAndDie` object later on (to play a game)? A player, in our application, is not just a group of *scalar*  values (single values like a string, or integer). It is a object that can win a game and lose a game. That sort of logic cannot be stored or represented in a relational database. It must exist on our server-side application. We want to construct a `Player` object from the raw data that we query from the database. We want to create an *object* from *relational data*.
 
-Enter *Object Relational Mapping* (ORM). This is a technique for doing precisely what we want. Generally, each record in a table becomes one object (so a player record becomes an instance of `Player`), and each column in the table corresponds to an object attribute (so, the `name`, `win_msg`, `lose_msg`, `wins`, and `losses` columns becomes attributes of our `Player` object).
+Enter *Object Relational Mapping* (ORM). This is a technique for doing precisely what we want. Generally, each record in a table becomes one object (so a player record becomes an instance of `Player`), and each column in the table corresponds to an object attribute (so, the `name`, `win_msg`, `lose_msg`, `wins`, and `losses` columns become attributes of our `Player` object).
 
 ORM libraries can construct this mapping between database table and object for us, and furthermore, can wrap our interactions with the database with Ruby methods. Meaning: we don't need to write raw SQL. Instead of:
 
@@ -1025,8 +1025,9 @@ This is no easy task! You need to figure out a few things:
 
 1. How to send data in a POST request with `curl`
 2. How to extract the HTTP method from the request (this is pretty sraightforward)
-3. How to use Sequel to save a new database record
-4. How to check that your implementation works
+3. How to extract the data from the HTTP request body (this is not so straightforward)
+4. How to use Sequel to save a new database record
+5. How to check that your implementation works
 
 Happy hacking!
 
